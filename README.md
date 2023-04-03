@@ -1,19 +1,18 @@
-#GitHub Issue Extractor
+# GitHub Issue Extractor
 
 GitHub Issue Extractor is a Python script that extracts information about GitHub issues and provides it in a structured format. You can extract a single issue's data or fetch all issues of a repository filtered by a tag.
-##Features
 
-    Extract a single GitHub issue's data
-    Fetch all issues of a repository filtered by a tag
-    Convert raw JSON data into a more digestible, structured format
+## Features
 
-##Requirements
+- Extract a single GitHub issue's data
+- Fetch all issues of a repository filtered by a tag
+- Convert raw JSON data into a more digestible, structured format
 
-    Nix package manager with flakes enabled
+## Requirements
 
-##Installation
+Nix package manager with flakes enabled
 
-    Clone the repository:
+## Installation
 
 ``` bash
 git clone https://github.com/ford-perfect/github_issues_xd
@@ -22,38 +21,37 @@ nix develop
 ```
 
 
-Usage
+## Usage
 
-    Set the GITHUB_PERSONAL_ACCESS_TOKEN environment variable in the shell or put it in the .env file in the root directory of the project:
-
-bash
+Set the GITHUB_PERSONAL_ACCESS_TOKEN environment variable *OR *put it in the .env file in the root directory of the project, that gets sourced automatically. 
 
 ``` bash
 export GITHUB_PERSONAL_ACCESS_TOKEN=your_personal_access_token
 ```
 
 
-    Extract a single GitHub issue's data:
+Extract a single GitHub issue's data:
 
-bash
-```
+``` bash
 python main.py "https://github.com/owner/repo/issues/123"
 ```
 
+Fetch all issues of a repository filtered by a tag:
 
-    Fetch all issues of a repository filtered by a tag:
-
-bash
-
-```
+``` bash
 python main.py "https://github.com/owner/repo" --tag "your_tag"
 ```
 
+Pretty print the json for easier debuging:
 
-##Customization
+``` bash
+python github_issues_json.py REPO --pretty
+```
+
+## Customization
 
 You can customize the script by modifying the create_structured_issues_data and create_structured_issue_data functions to change the structured format of the issue data.
 
-##License
+## License
 
 This project is licensed under the GNU General Public License v.3.0
