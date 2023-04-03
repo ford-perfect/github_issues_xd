@@ -57,6 +57,22 @@ def fetch_issues_by_tag(repo_owner, repo_name, label, personal_access_token):
     issues = response.json()
     return issues
 
+def create_structured_issues_data(raw_issues):
+    structured_issues = []
+
+    for issue in raw_issues:
+        labels = [label["name"] for label in issue["labels"]]
+        structured_issue = {
+            "title": issue["title"],
+            "author": issue["user"]["login"],
+            "timestamp": issue["created_at"],
+            "body": issue["body"],
+            "labels": labels
+        }
+        structured_issues.append(structured_issue)
+
+    return structured_issues
+
 def main():
     parser = argparse.ArgumentParser(description="GitHub Issue Extractor")
     parser.add_argument("url", help="URL of the GitHub issue")
@@ -87,6 +103,7 @@ def main():
         # Call the issue extraction function with the repo_owner, repo_name, issue_number, and personal_access_token
         repo_owner, repo_name, _, issue_number = path_parts
         issue = fetch_github_issue(repo_owner, repo_name, issue_number, personal_access_token)
-        print(issue)
+        structured_issue = create_structured_issues_data(issue)
+        print(structured_issue)
 if __name__ == "__main__":
     main()
