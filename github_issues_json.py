@@ -73,11 +73,17 @@ def create_structured_issues_data(raw_issues):
 
     return structured_issues
 
+def pretty_print_json_when_needed(data, pretty):
+    if pretty:
+        print(json.dumps(data, indent=2))
+    else:
+        print(json.dumps(data))
 def main():
     parser = argparse.ArgumentParser(description="GitHub Issue Extractor")
     parser.add_argument("url", help="URL of the GitHub issue")
     parser.add_argument("--tag", help="Filter issues by tag")
-
+    # store true means that the argument is a flag
+    parser.add_argument("--pretty", help="Pretty print JSON output", action="store_true")
     args = parser.parse_args()
     issue_url = args.url
     tag = args.tag
@@ -94,16 +100,15 @@ def main():
     if len(path_parts) < 2:
         raise ValueError("Invalid issue URL format")
 
-
-    if tag:
+    if len(path_parts) == 2:
         repo_owner, repo_name = path_parts[:2]
         issues = fetch_issues_by_tag(repo_owner, repo_name, tag, personal_access_token)
-        print(issues)
+        structured_issue = create_structured_issues_data(issues)
+        pretty_print_json_when_needed(structured_issue, args.pretty)
     else:
         # Call the issue extraction function with the repo_owner, repo_name, issue_number, and personal_access_token
         repo_owner, repo_name, _, issue_number = path_parts
-        issue = fetch_github_issue(repo_owner, repo_name, issue_number, personal_access_token)
-        structured_issue = create_structured_issues_data(issue)
-        print(structured_issue)
+        issue_comments = fetch_github_issue(repo_owner, repo_name, issue_number, personal_access_token)
+        pretty_print_json_when_needed(issue_comments, args.pretty)
 if __name__ == "__main__":
     main()
