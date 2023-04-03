@@ -1,0 +1,44 @@
+{
+"questions": [
+{
+"question": "What is the main concern or problem raised in the issue?",
+"response_type": "text"
+},
+{
+"question": "Are there any proposed solutions or workarounds mentioned in the issue?",
+"response_type": "text"
+},
+{
+"question": "Has a consensus been reached among the participants in the issue?",
+"response_type": "boolean"
+},
+{
+"question": "Have any significant milestones or deadlines been mentioned in the issue?",
+"response_type": "date"
+},
+{
+"question": "What technologies are being discussed or referenced in the issue?",
+"response_type": "technology"
+},
+{
+"question": "Are there any security concerns or vulnerabilities mentioned in the issue?",
+"response_type": "security"
+},
+{
+"question": "What is the level of community engagement or interest in the issue?",
+"response_type": "number"
+},
+{
+"question": "Are there any relevant tags or labels attached to the issue?",
+"response_type": "tag"
+},
+{
+"question": "Is the issue considered a roadblock to the project's progress?",
+"response_type": "roadblock"
+},
+{
+"question": "Is the issue considered unsolvable within a reasonable time?",
+"response_type": "unsolvable"
+}
+]
+}
